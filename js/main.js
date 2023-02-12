@@ -15,17 +15,21 @@ let board;
 let turn = "X";
 let win;
 
+let xWins = 0;
+let oWins = 0;
+
 /*----- cached element references -----*/
 const squares = Array.from(document.querySelectorAll("#board div"));
 const messages = document.querySelector("h2");
 
 /*----- event listeners -----*/
-document.getElementById("board").addEventListener("click", handleTurn);
 document.getElementById("reset-button").addEventListener("click", init);
 
 /*----- functions -----*/
 function init() {
+  document.getElementById("board").addEventListener("click", handleTurn);
   board = ["", "", "", "", "", "", "", "", ""]; //3x3 board
+  win = null;
 
   render();
 }
@@ -36,12 +40,20 @@ function render() {
     squares[index].textContent = mark;
   });
 
-  messages.textContent =
-    win === "T"
-      ? `It's a tie!`
-      : win
-      ? `${win} wins the game!`
-      : `It's ${turn}'s turn!`;
+  console.log("X: " + xWins + " O: " + oWins);
+
+  if (win === "T") {
+    messages.textContent = `It's a tie!`;
+  } else if (win) {
+    messages.textContent = `${win} wins the game!`;
+    if (win === "X") {
+      xWins++;
+    } else {
+      oWins++;
+    }
+  } else {
+    messages.textContent = `It's ${turn}'s turn!`;
+  }
 }
 
 function handleTurn(event) {
@@ -56,6 +68,7 @@ function handleTurn(event) {
   board[index] = turn;
   //determine/swap turn
   turn = turn === "X" ? "O" : "X";
+
   win = getWinner();
 
   render();
@@ -70,6 +83,7 @@ function getWinner() {
       board[combo[0]] === board[combo[2]]
     ) {
       winner = board[combo[0]];
+      document.getElementById("board").removeEventListener("click", handleTurn);
     }
   });
 
