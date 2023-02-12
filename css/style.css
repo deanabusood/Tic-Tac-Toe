@@ -1,11 +1,24 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
 body {
   text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Courier New", Courier, monospace, Verdana, Geneva, Tahoma,
+    sans-serif;
+  background-color: rgb(183, 188, 207);
 }
 
 header {
   display: flex;
   justify-content: space-around;
+
+  margin-top: 100px;
 }
 
 #xScore,
@@ -14,9 +27,10 @@ header {
 }
 
 h2 {
-  margin: 0 auto;
   font-size: 35px;
-  margin: 10px;
+
+  margin-top: 75px;
+  margin-bottom: 25px;
 }
 .flex-container {
   display: flex;
@@ -37,6 +51,8 @@ h2 {
   width: 432px;
 }
 .square {
+  background-color: rgb(245, 236, 236);
+
   border: 2px solid rgba(0, 0, 0, 0.75);
   height: 140px;
   width: 140px;
