@@ -48,6 +48,10 @@ function handleTurn(event) {
   let index = squares.findIndex(function (square) {
     return square === event.target;
   });
+  //check if already occupied
+  if (board[index] !== "") {
+    return;
+  }
   //input onto board
   board[index] = turn;
   //determine/swap turn
