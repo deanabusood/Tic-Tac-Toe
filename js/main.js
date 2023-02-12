@@ -22,6 +22,9 @@ let oWins = 0;
 const squares = Array.from(document.querySelectorAll("#board div"));
 const messages = document.querySelector("h2");
 
+const xScore = document.querySelector("#xScore span");
+const oScore = document.querySelector("#oScore span");
+
 /*----- event listeners -----*/
 document.getElementById("reset-button").addEventListener("click", init);
 
@@ -30,6 +33,7 @@ function init() {
   document.getElementById("board").addEventListener("click", handleTurn);
   board = ["", "", "", "", "", "", "", "", ""]; //3x3 board
   win = null;
+  turn = "X";
 
   render();
 }
@@ -40,16 +44,16 @@ function render() {
     squares[index].textContent = mark;
   });
 
-  console.log("X: " + xWins + " O: " + oWins);
-
   if (win === "T") {
     messages.textContent = `It's a tie!`;
   } else if (win) {
     messages.textContent = `${win} wins the game!`;
     if (win === "X") {
       xWins++;
+      xScore.textContent = xWins;
     } else {
       oWins++;
+      oScore.textContent = oWins;
     }
   } else {
     messages.textContent = `It's ${turn}'s turn!`;
